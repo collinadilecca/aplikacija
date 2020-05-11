@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Administrator } from '../../../entities/administrator.entity';
+import { Administrator } from '../../entities/administrator.entity';
 import { Repository } from 'typeorm';
 import { AddAdministratorDto } from '../../dtos/administrator/add.administrator.dto';
 import { editAdministratorDto } from '../../dtos/administrator/edit.administrator.dto';
 import { ApiResponse } from 'src/misc/api.response.class';
-import { resolve } from 'dns';
-import { async } from 'rxjs/internal/scheduler/async';
+import * as crypto from 'crypto';
 
 
 
@@ -33,7 +32,6 @@ export class AdministratorService {
     }
 
     add(data: AddAdministratorDto): Promise<Administrator | ApiResponse> {
-        const crypto = require('crypto');
 
         const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
